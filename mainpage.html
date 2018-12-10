@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sportmates for Web</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-orange.min.css" />
+
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-app.js"></script>
+
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBCTLX9xzfzOg90lhs8UoFrfP7K4ak0i7o",
+            authDomain: "sportmateslite.firebaseapp.com",
+            databaseURL: "https://sportmateslite.firebaseio.com",
+            projectId: "sportmateslite",
+            storageBucket: "sportmateslite.appspot.com"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="main_page.js"></script>
+</head>
+<body>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">Sportmates Web</span>
+        <div class="mdl-layout-spacer"></div>
+        <button id="demo-menu-lower-right"
+                class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">more_vert</i>
+        </button>
+    </div>
+
+
+
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+        for="demo-menu-lower-right">
+        <li class="mdl-menu__item" onclick="showAboutDialog()">O aplikaci</li>
+        <li class="mdl-menu__item" onclick="logOut()">Odhlásit se</li>
+    </ul>
+
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Najít hru</a>
+        <a href="#scroll-tab-2" class="mdl-layout__tab">Moje hry</a>
+        <a href="#scroll-tab-3" class="mdl-layout__tab">Profil</a>
+    </div>
+</header>
+<main class="mdl-layout__content">
+    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+        <div class="page-content">
+
+            <div style="height: 125px; background-color: #FAFAFA; width: 100%; border-bottom: 1px solid #DCDCDC;">
+                <p style="line-height: 125px; font-size: 20px; padding-left: 80px;">Najít hru</p>
+            </div>
+
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin: 32px auto;">
+                <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Místo konání</th>
+                    <th  class="mdl-data-table__cell--non-numeric">Pořadatel</th>
+                    <th  class="mdl-data-table__cell--non-numeric">Sport</th>
+                    <th class="mdl-data-table__cell--non-numeric">Datum</th>
+                    <th class="mdl-data-table__cell--non-numeric">Začátek</th>
+                    <th class="mdl-data-table__cell--non-numeric">Konec</th>
+                </tr>
+                </thead>
+                <tbody id="gamesTable">
+
+                </tbody>
+            </table>
+
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored fab-right-bottom">
+                <i class="material-icons">add</i>
+            </button>
+
+        </div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+        <div class="page-content">
+
+            <div style="height: 125px; background-color: #FAFAFA; width: 100%; border-bottom: 1px solid #DCDCDC;">
+                <p style="line-height: 125px; font-size: 20px; padding-left: 80px;">Moje hry</p>
+            </div>
+
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored fab-right-bottom">
+                <i class="material-icons">add</i>
+            </button>
+
+        </div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+        <div class="page-content">
+
+        <div style="height: 125px; background-color: #FAFAFA; width: 100%; border-bottom: 1px solid #DCDCDC;">
+            <p style="line-height: 125px; font-size: 20px; padding-left: 80px;">Profil</p>
+        </div>
+
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored fab-right-bottom">
+                <i class="material-icons">add</i>
+            </button>
+
+    </div>
+    </section>
+
+</main>
+</div>
+
+
+
+    <div id="errorToast" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
+
+<!-- ABOUT APP MODAL DIALOG -->
+<dialog class="mdl-dialog" id="aboutAppDialog">
+    <h4 class="mdl-dialog__title">Sportmates</h4>
+    <div class="mdl-dialog__content">
+        <p>Verze aplikace: 1.0</p>
+    </div>
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button" onclick="hideAboutDialog()">Zavřít</button>
+    </div>
+</dialog>
+
+</body>
+</html>
