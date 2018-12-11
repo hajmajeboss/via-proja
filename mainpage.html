@@ -29,6 +29,7 @@
         firebase.initializeApp(config);
     </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script type="text/javascript" src="main_page.js"></script>
 </head>
 <body>
@@ -37,7 +38,7 @@
 <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title">Sportmates Web</span>
+        <span class="mdl-layout-title">Sportmates</span>
         <div class="mdl-layout-spacer"></div>
         <button id="demo-menu-lower-right"
                 class="mdl-button mdl-js-button mdl-button--icon">
@@ -55,9 +56,8 @@
 
     <!-- Tabs -->
     <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-        <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Najít hru</a>
-        <a href="#scroll-tab-2" class="mdl-layout__tab">Moje hry</a>
-        <a href="#scroll-tab-3" class="mdl-layout__tab">Profil</a>
+        <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Seznam všech her</a>
+        <a href="#scroll-tab-2" class="mdl-layout__tab">Statistika</a>
     </div>
 </header>
 <main class="mdl-layout__content">
@@ -65,7 +65,7 @@
         <div class="page-content">
 
             <div style="height: 125px; background-color: #FAFAFA; width: 100%; border-bottom: 1px solid #DCDCDC;">
-                <p style="line-height: 125px; font-size: 20px; padding-left: 80px;">Najít hru</p>
+                <p style="line-height: 125px; font-size: 20px; padding-left: 80px;">Seznam všech her</p>
             </div>
 
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="margin: 32px auto;">
@@ -84,9 +84,6 @@
                 </tbody>
             </table>
 
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored fab-right-bottom">
-                <i class="material-icons">add</i>
-            </button>
 
         </div>
     </section>
@@ -94,12 +91,13 @@
         <div class="page-content">
 
             <div style="height: 125px; background-color: #FAFAFA; width: 100%; border-bottom: 1px solid #DCDCDC;">
-                <p style="line-height: 125px; font-size: 20px; padding-left: 80px;">Moje hry</p>
+                <p style="line-height: 125px; font-size: 20px; padding-left: 80px;">Statistika registrovaných her</p>
             </div>
 
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored fab-right-bottom">
-                <i class="material-icons">add</i>
-            </button>
+            <div style="width: 600px; height: 600px; margin: 50px auto;">
+            <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+
 
         </div>
     </section>
@@ -110,9 +108,6 @@
             <p style="line-height: 125px; font-size: 20px; padding-left: 80px;">Profil</p>
         </div>
 
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored fab-right-bottom">
-                <i class="material-icons">add</i>
-            </button>
 
     </div>
     </section>
